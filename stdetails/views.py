@@ -7,18 +7,23 @@ from .variables import Variables
 class HomePageView(FormView):
     template_name = "home.html"
     form_class = Loginform
+    #Post.objects.all().delete()
+    #details.objects.all().delete()
     success_url = 'details'
     def form_valid(self,form):
-        #Post.objects.all().delete()
-        #details.objects.all().delete()
         #A = Post(Username=form.cleaned_data['Username'])
         if Post.objects.filter(Username=form.cleaned_data['Username']).exists():
-            Variables.currentUser = Username=form.cleaned_data['Username']
-            return super().form_valid(form)
+            if Post.objects.get(Username=form.cleaned_data['Username']).password == form.cleaned_data['Password']:
+                Variables.currentUser=form.cleaned_data['Username']
+                return super().form_valid(form)
+            else:
+                print("worng password")
+                return super().form_invalid(form)
         else:
+            print("User doesnot exists")
             #k = Post(Username=form.cleaned_data['Username'],password=form.cleaned_data['Password'])
             #k.save(self)
-            print(Post.objects.all())
+            #print(Post.objects.all())
             return super().form_invalid(form)
             
 class DetailsPageView(TemplateView):
@@ -26,10 +31,12 @@ class DetailsPageView(TemplateView):
     template_name = "details.html"
 
     def get_context_data(self, **kwargs):
-        context = super(DetailsPageView, self).get_context_data(**kwargs)
+        #print(Variables.currentUser)
         if Post.objects.filter(Username=Variables.currentUser).exists():
-            context['details'] = Post.objects.get(Username = Variables.currentUser) 
-        return context
+            context = super(DetailsPageView, self).get_context_data(**kwargs)
+            context['details'] = details.objects.get(Pin_no = Variables.currentUser)
+         #   print(Post.objects.all())
+            return context
     
 
 class RegisterPageView(FormView):
@@ -44,9 +51,9 @@ class RegisterPageView(FormView):
                 k = details(Fristname=form.cleaned_data['Fristname'],Lastname=form.cleaned_data['Lastname'],Pin_no=form.cleaned_data['Pin_no'])
                 k.save()
                 return super().form_valid(form)
-        for M in Post.objects.all():
-            print(M.Username)
-            print(M.password)
+        #for M in Post.objects.all():
+          # print(M.Username)
+           # print(M.password)
         return super().form_invalid(form)
 # Create your views here.
 

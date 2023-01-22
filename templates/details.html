@@ -26,21 +26,18 @@
     
         <div class="mainContainer">
         <label for="Firstnam">Firstname:</label>
-        <input type="text" value="{{details}}" name="Firstname" id="Firstnam" readonly>
+        <input type="text" value="{{details.Fristname}}" name="Firstname" id="Firstnam" readonly>
         <br><br>
             
         <label for="Lastnam">Lastname:</label>
-        <input type="text" value="Enter your Lastname" name="Lastname" id="Lastnam" readonly>
+        <input type="text" value="{{details.Lastname}}" name="Lastname" id="Lastnam" readonly>
         <br><br>
     
         <label for="pinn">Pin no:</label>
-        <input type="text" value="Enter your pinno" name="pinno" id="pinn" readonly>
+        <input type="text" value="{{details.Pin_no}}" name="pinno" id="pinn" readonly>
         <br><br>  
 
-        
-        <label for="emai">Email:</label>
-        <input type="email" value="Enter your email" name="email" id="emai" readonly>
-        <br><br>
+    
         </div>
     </div>      
 </body>
