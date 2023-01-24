@@ -8,9 +8,9 @@ class registerform(forms.Form):
     Pin_no = forms.CharField(max_length=50,required=True,widget = forms.TextInput
                                         (attrs={'placeholder':'Pin_no'}))
     Password = forms.CharField(max_length=50,required=True,widget = forms.TextInput
-                                        (attrs={'placeholder':'Password'}))
+                                        (attrs={'placeholder':'Password','type':'password'}))
     confirm_password = forms.CharField(max_length=50,required=True,widget = forms.TextInput
-                                        (attrs={'placeholder':'confirm_password'}))
+                                        (attrs={'placeholder':'confirm_password','type':'password'}))
                                     
 
 class Loginform(forms.Form):
@@ -18,4 +18,4 @@ class Loginform(forms.Form):
                                         (attrs={'placeholder':'Username'}))
 
     Password = forms.CharField( max_length=50, required=True,widget= forms.TextInput
-                                        (attrs={'placeholder':'Password'}))
+                                        (attrs={'placeholder':'Password','type':'password'}))

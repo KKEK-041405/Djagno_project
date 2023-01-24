@@ -40,20 +40,19 @@ class DetailsPageView(TemplateView):
     
 
 class RegisterPageView(FormView):
+    for M in Post.objects.all():
+           print(M.Username)
+           print(M.password)
     template_name = "register.html"
     form_class = registerform
     success_url = '/'
     def form_valid(self,form):
-        if not Post.objects.filter(Username = form.cleaned_data['Pin_no']).exists():
-            if  form.cleaned_data['Password'] == form.cleaned_data['confirm_password']:
-                a = Post(Username=form.cleaned_data['Pin_no'],password=form.cleaned_data['Password'])
-                a.save()
-                k = details(Fristname=form.cleaned_data['Fristname'],Lastname=form.cleaned_data['Lastname'],Pin_no=form.cleaned_data['Pin_no'])
-                k.save()
-                return super().form_valid(form)
-        #for M in Post.objects.all():
-          # print(M.Username)
-           # print(M.password)
+        if not Post.objects.filter(Username = form.cleaned_data['Pin_no']).exists() and form.cleaned_data['Password'] == form.cleaned_data['confirm_password']:
+            a = Post(Username=form.cleaned_data['Pin_no'],password=form.cleaned_data['Password'])
+            a.save()
+            k = details(Fristname=form.cleaned_data['Fristname'],Lastname=form.cleaned_data['Lastname'],Pin_no=form.cleaned_data['Pin_no'])
+            k.save()
+            return super().form_valid(form)
         return super().form_invalid(form)
 # Create your views here.
 
